@@ -2,23 +2,19 @@
   "name": "rebel",
   "description": "Build system for reason that conforms to the magic-build spec. Implemented with Jenga.",
   "dependencies": {
-    "dependency-env": "https://github.com/npm-ml/dependency-env.git",
-    "js_of_ocaml-bin": "https://github.com/reasonml/js_of_ocaml-bin.git",
-    "@opam-alpha/jenga": "*",
-    "@opam-alpha/ocamlfind": "*",
-    "@opam-alpha/yojson": "*",
-    "nopam": "https://github.com/yunxing/nopam.git",
-    "ocamlBetterErrors": "0.0.10",
-    "reason": "https://github.com/facebook/reason.git"
+    "js_of_ocaml-bin": "esy-ocaml/js_of_ocaml-bin.git#esy",
+    "@opam/jenga": "*",
+    "@opam/ocamlfind": "*",
+    "@opam/yojson": "*",
+    "ocamlBetterErrors": "esy-ocaml/BetterErrors#esy",
+    "reason": "andreypopp/reason.git#esy"
   },
   "devDependencies": {},
-  "exportedEnvVars": {
-    "PATH": {
-      "global": true,
-      "globalCollisionBehavior": "joinPath",
-      "resolveAsRelativePath": true,
-      "val": "./_build/src/"
-    }
+  "esy": {
+    "build": [
+      "./compile-rebel.sh",
+      "cp _build/src/rebel $cur__bin/"
+    ]
   },
   "license": "ISC",
   "scripts": {
@@ -26,9 +22,7 @@
     "rebel:re": "eval $(dependencyEnv) && npm run rebel && ./rebel.sh examples/reason-project",
     "rebel:rs": "eval $(dependencyEnv) && npm run rebel && ./rebel.sh examples/recursive-src",
     "rebel:bs": "eval $(dependencyEnv) && npm run rebel && ./rebel.sh examples/bs-project",
-    "rebel": "eval $(dependencyEnv) && nopam && ./compile-rebel.sh",
-    "editor": "eval $(dependencyEnv) && $EDITOR .",
-    "postinstall": "npm run rebel"
+    "editor": "eval $(dependencyEnv) && $EDITOR ."
   },
   "version": "0.0.23"
 }
